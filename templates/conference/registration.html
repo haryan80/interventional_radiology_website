@@ -1,0 +1,129 @@
+{% extends 'conference/base.html' %}
+
+{% block title %}Registration - First KHCC Interventional Oncology Conference 2025{% endblock %}
+
+{% block content %}
+<!-- Registration Hero Section -->
+<section class="hero-section text-center">
+    <div class="container">
+        <h1 class="display-4 fw-bold mb-4">Register for the Conference</h1>
+        <p class="lead mb-4">Secure your spot at the First KHCC Interventional Oncology Conference 2025.</p>
+    </div>
+</section>
+
+<!-- Registration Form Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card shadow">
+                    <div class="card-body p-5">
+                        <h3 class="mb-4 text-center">Registration Information</h3>
+                        
+                        <div class="alert alert-info mb-4">
+                            <div class="row text-center">
+                                <div class="col-md-6 mb-3 mb-md-0">
+                                    <h5>Specialists:</h5>
+                                    <p class="fw-bold mb-0">50 JD</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Trainees & Fellows:</h5>
+                                    <p class="fw-bold mb-0">Free</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <form method="post" novalidate>
+                            {% csrf_token %}
+                            
+                            <div class="mb-3">
+                                <label for="{{ form.full_name.id_for_label }}" class="form-label">Full Name <span class="text-danger">*</span></label>
+                                {{ form.full_name }}
+                                {% if form.full_name.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {{ form.full_name.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ form.email.id_for_label }}" class="form-label">Email Address <span class="text-danger">*</span></label>
+                                    {{ form.email }}
+                                    {% if form.email.errors %}
+                                        <div class="invalid-feedback d-block">
+                                            {{ form.email.errors }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ form.email_confirm.id_for_label }}" class="form-label">Confirm Email <span class="text-danger">*</span></label>
+                                    {{ form.email_confirm }}
+                                    {% if form.email_confirm.errors %}
+                                        <div class="invalid-feedback d-block">
+                                            {{ form.email_confirm.errors }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="{{ form.phone.id_for_label }}" class="form-label">Phone Number</label>
+                                {{ form.phone }}
+                                {% if form.phone.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {{ form.phone.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="{{ form.institution.id_for_label }}" class="form-label">Institution/Hospital <span class="text-danger">*</span></label>
+                                {{ form.institution }}
+                                {% if form.institution.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {{ form.institution.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="{{ form.attendee_type.id_for_label }}" class="form-label">Attendee Type <span class="text-danger">*</span></label>
+                                {{ form.attendee_type }}
+                                {% if form.attendee_type.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {{ form.attendee_type.errors }}
+                                    </div>
+                                {% endif %}
+                                <div class="form-text">
+                                    Note: Trainees/Fellows will be required to provide proof of status at check-in.
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="{{ form.special_requirements.id_for_label }}" class="form-label">Special Requirements or Dietary Restrictions</label>
+                                {{ form.special_requirements }}
+                                {% if form.special_requirements.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {{ form.special_requirements.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary btn-lg">Submit Registration</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="mt-4 text-center">
+                    <p class="small text-muted">
+                        For any questions regarding registration, please contact us at <a href="mailto:info@khcc-conference.org">info@khcc-conference.org</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} 

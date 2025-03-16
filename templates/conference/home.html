@@ -1,0 +1,205 @@
+{% extends 'conference/base.html' %}
+
+{% block title %}First KHCC Interventional Oncology Conference 2025{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section text-center">
+    <div class="container">
+        <!-- Logo Image -->
+        <div class="mb-4">
+            <img src="/media/logo.png" alt="KHCC Interventional Oncology Conference Logo" class="img-fluid hero-logo" style="max-width: 300px;">
+        </div>
+        
+        <h1 class="display-4 fw-bold mb-4">First KHCC Interventional Oncology Conference 2025</h1>
+        <p class="lead mb-4">Pioneering the Future of Cancer Treatment Through Innovation</p>
+        <div class="d-flex justify-content-center">
+            <div class="me-3">
+                <i class="far fa-calendar-alt me-2"></i> April 18-19, 2025
+            </div>
+            <div>
+                <i class="fas fa-map-marker-alt me-2"></i> Four Seasons Hotel, Amman
+            </div>
+        </div>
+        <a href="{% url 'registration' %}" class="btn btn-accent btn-lg mt-4">Register Now</a>
+    </div>
+</section>
+
+<!-- About Conference Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="mb-4">About the Conference</h2>
+                <p class="lead">The First KHCC Interventional Oncology Conference 2025 is a pioneering event that gathers leading experts in the field to explore innovative approaches to cancer treatment.</p>
+            </div>
+        </div>
+        
+        <div class="row mt-5">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 text-center p-4">
+                    <div class="card-body">
+                        <i class="fas fa-lightbulb fa-3x mb-3" style="color: var(--primary-color);"></i>
+                        <h4>Cutting-Edge Innovation</h4>
+                        <p>Featuring groundbreaking new technology in interventional oncology, poised to redefine the treatment landscape for various tumors.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 text-center p-4">
+                    <div class="card-body">
+                        <i class="fas fa-user-md fa-3x mb-3" style="color: var(--primary-color);"></i>
+                        <h4>Distinguished Speakers</h4>
+                        <p>A distinguished lineup of international and local speakers, showcasing the latest advancements in minimally invasive cancer therapies.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 text-center p-4">
+                    <div class="card-body">
+                        <i class="fas fa-procedures fa-3x mb-3" style="color: var(--primary-color);"></i>
+                        <h4>Precision Treatment</h4>
+                        <p>Gain valuable insights into novel, precision-based treatment methods for cancers affecting the liver, lung, and kidney.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Speakers Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="mb-4">Featured Speakers</h2>
+                <p>Meet some of our distinguished speakers who are at the forefront of interventional oncology.</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            {% for speaker in featured_speakers %}
+            <div class="col-md-4 mb-4">
+                <div class="card speaker-card h-100">
+                    {% if speaker.photo %}
+                    <img src="{{ speaker.photo.url }}" class="card-img-top" alt="{{ speaker.name }}">
+                    {% else %}
+                    <div class="bg-secondary" style="height: 250px; display: flex; align-items: center; justify-content: center;">
+                        <span class="text-white">Photo Coming Soon</span>
+                    </div>
+                    {% endif %}
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ speaker.name }}</h5>
+                        {% if speaker.title %}<p class="card-text text-muted mb-1">{{ speaker.title }}</p>{% endif %}
+                        {% if speaker.institution %}<p class="card-text text-muted">{{ speaker.institution }}</p>{% endif %}
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center">
+                <p>Speaker lineup will be announced soon!</p>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="text-center mt-4">
+            <a href="{% url 'speakers' %}" class="btn btn-primary">View All Speakers</a>
+        </div>
+    </div>
+</section>
+
+<!-- Upcoming Sessions Preview -->
+<section class="py-5">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="mb-4">Program Highlights</h2>
+                <p>A sneak peek into our comprehensive conference program. View the full schedule for more details.</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            {% for session in upcoming_sessions %}
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ session.name }}</h4>
+                        <p class="text-muted mb-3">
+                            <i class="far fa-calendar-alt me-2"></i> {{ session.date|date:"F d, Y" }} | 
+                            <i class="far fa-clock me-2"></i> {{ session.start_time|time:"g:i A" }} - {{ session.end_time|time:"g:i A" }}
+                        </p>
+                        {% if session.description %}
+                        <p>{{ session.description }}</p>
+                        {% endif %}
+                        
+                        <h5 class="mt-4 mb-3">Session Items:</h5>
+                        <ul class="list-group list-group-flush">
+                            {% for item in session.items.all|slice:":3" %}
+                            <li class="list-group-item px-0">
+                                <div class="d-flex justify-content-between">
+                                    <span>{{ item.title }}</span>
+                                    <small class="text-muted">{{ item.start_time|time:"g:i A" }} - {{ item.end_time|time:"g:i A" }}</small>
+                                </div>
+                                {% if item.speakers.exists %}
+                                <small class="text-muted">
+                                    Speakers: {% for speaker in item.speakers.all %}{{ speaker.name }}{% if not forloop.last %}, {% endif %}{% endfor %}
+                                </small>
+                                {% endif %}
+                            </li>
+                            {% empty %}
+                            <li class="list-group-item px-0">Session details coming soon</li>
+                            {% endfor %}
+                        </ul>
+                        
+                        {% if session.items.count > 3 %}
+                        <div class="text-center mt-3">
+                            <small class="text-muted">And {{ session.items.count|add:"-3" }} more items...</small>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center">
+                <p>Program schedule will be announced soon!</p>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="text-center mt-4">
+            <a href="{% url 'schedule' %}" class="btn btn-primary">View Full Schedule</a>
+        </div>
+    </div>
+</section>
+
+<!-- Registration Call to Action -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="mb-4">Join Us at the Conference</h2>
+                <p class="lead mb-4">Don't miss this opportunity to be part of a groundbreaking event in interventional oncology.</p>
+                <div class="card mb-4">
+                    <div class="card-body p-4">
+                        <div class="row">
+                            <div class="col-md-6 mb-3 mb-md-0">
+                                <div class="text-center">
+                                    <h4>Specialists</h4>
+                                    <p class="display-6 fw-bold mb-0">50 JD</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="text-center">
+                                    <h4>Trainees & Fellows</h4>
+                                    <p class="display-6 fw-bold mb-0">Free</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="{% url 'registration' %}" class="btn btn-accent btn-lg">Register Now</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} 

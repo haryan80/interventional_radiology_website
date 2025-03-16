@@ -1,0 +1,130 @@
+{% extends 'conference/base.html' %}
+
+{% block title %}Schedule - First KHCC Interventional Oncology Conference 2025{% endblock %}
+
+{% block content %}
+<!-- Schedule Hero Section -->
+<section class="hero-section text-center">
+    <div class="container">
+        <h1 class="display-4 fw-bold mb-4">Conference Schedule</h1>
+        <p class="lead mb-4">Explore our comprehensive program featuring cutting-edge presentations, interactive sessions, and networking opportunities.</p>
+    </div>
+</section>
+
+<!-- Schedule Content -->
+<section class="py-5">
+    <div class="container">
+        {% if schedule_by_date %}
+            <ul class="nav nav-pills mb-5 justify-content-center" id="scheduleTab" role="tablist">
+                {% for date_key, date_data in schedule_by_date.items %}
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link {% if forloop.first %}active{% endif %}" 
+                                id="day{{ forloop.counter }}-tab" 
+                                data-bs-toggle="pill" 
+                                data-bs-target="#day{{ forloop.counter }}" 
+                                type="button" 
+                                role="tab" 
+                                aria-controls="day{{ forloop.counter }}" 
+                                aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">
+                            Day {{ forloop.counter }} - {{ date_data.date_display }}
+                        </button>
+                    </li>
+                {% endfor %}
+            </ul>
+            
+            <div class="tab-content" id="scheduleTabContent">
+                {% for date_key, date_data in schedule_by_date.items %}
+                    <div class="tab-pane fade {% if forloop.first %}show active{% endif %}" 
+                         id="day{{ forloop.counter }}" 
+                         role="tabpanel" 
+                         aria-labelledby="day{{ forloop.counter }}-tab">
+                        
+                        <h3 class="text-center mb-4">{{ date_data.date_display }}</h3>
+                        
+                        {% for session in date_data.sessions %}
+                            <div class="card mb-4">
+                                <div class="card-header bg-primary text-white">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h4 class="mb-0">{{ session.name }}</h4>
+                                        <span>{{ session.start_time|time:"g:i A" }} - {{ session.end_time|time:"g:i A" }}</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="card-body">
+                                    {% if session.description %}
+                                        <p class="mb-4">{{ session.description }}</p>
+                                    {% endif %}
+                                    
+                                    <div class="timeline">
+                                        {% for item in session.items.all %}
+                                            <div class="schedule-item {% if item.is_break %}break{% endif %} mb-4">
+                                                <div class="d-flex justify-content-between">
+                                                    <h5>{{ item.title }}</h5>
+                                                    <span class="schedule-time">{{ item.start_time|time:"g:i A" }} - {{ item.end_time|time:"g:i A" }}</span>
+                                                </div>
+                                                
+                                                {% if item.description %}
+                                                    <p>{{ item.description }}</p>
+                                                {% endif %}
+                                                
+                                                {% if item.speakers.exists and not item.is_break %}
+                                                    <div class="speakers mt-2">
+                                                        <small class="text-muted d-block mb-2">Presented by:</small>
+                                                        <div class="row">
+                                                            {% for speaker in item.speakers.all %}
+                                                                <div class="col-md-6 mb-2">
+                                                                    <div class="d-flex align-items-center">
+                                                                        {% if speaker.photo %}
+                                                                            <img src="{{ speaker.photo.url }}" alt="{{ speaker.name }}" 
+                                                                                 class="rounded-circle me-2" style="width: 40px; height: 40px; object-fit: cover;">
+                                                                        {% else %}
+                                                                            <div class="bg-secondary rounded-circle me-2" 
+                                                                                 style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                                                                                <span class="text-white">{{ speaker.name|first }}</span>
+                                                                            </div>
+                                                                        {% endif %}
+                                                                        <div>
+                                                                            <span class="d-block">{{ speaker.name }}</span>
+                                                                            {% if speaker.institution %}
+                                                                                <small class="text-muted">{{ speaker.institution }}</small>
+                                                                            {% endif %}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            {% endfor %}
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        {% empty %}
+                                            <p class="text-center">Session details will be announced soon.</p>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="text-center py-5">
+                <h3>Program Coming Soon</h3>
+                <p class="lead">The detailed conference schedule will be available soon. Please check back later.</p>
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Registration Call to Action -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="mb-4">Ready to Join Us?</h2>
+                <p class="lead mb-4">Secure your spot at the First KHCC Interventional Oncology Conference 2025.</p>
+                <a href="{% url 'registration' %}" class="btn btn-accent btn-lg">Register Now</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} 

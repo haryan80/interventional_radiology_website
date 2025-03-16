@@ -1,0 +1,52 @@
+{% extends 'conference/base.html' %}
+
+{% block title %}Registration Successful - First KHCC Interventional Oncology Conference 2025{% endblock %}
+
+{% block content %}
+<!-- Success Hero Section -->
+<section class="hero-section text-center">
+    <div class="container">
+        <h1 class="display-4 fw-bold mb-4">Registration Successful!</h1>
+        <p class="lead mb-4">Thank you for registering for the First KHCC Interventional Oncology Conference 2025.</p>
+    </div>
+</section>
+
+<!-- Success Message Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card shadow text-center">
+                    <div class="card-body p-5">
+                        <div class="mb-4">
+                            <i class="fas fa-check-circle fa-5x text-success"></i>
+                        </div>
+                        
+                        <h3 class="mb-4">Your Registration is Complete</h3>
+                        
+                        <p class="lead">We have received your registration for the First KHCC Interventional Oncology Conference 2025.</p>
+                        
+                        <p>A confirmation email with all the details has been sent to your email address. If you don't receive it within 24 hours, please check your spam folder or contact us.</p>
+                        
+                        <div class="alert alert-info mt-4">
+                            <h5><i class="fas fa-calendar-alt me-2"></i> Mark Your Calendar</h5>
+                            <p class="mb-0">April 18-19, 2025<br>Four Seasons Hotel, Amman</p>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <p>For any questions or assistance, please contact us at:</p>
+                            <p><i class="fas fa-envelope me-2"></i> info@khcc-conference.org</p>
+                            <p><i class="fas fa-phone me-2"></i> +962 6 123 4567</p>
+                        </div>
+                        
+                        <div class="mt-5">
+                            <a href="{% url 'home' %}" class="btn btn-primary">Return to Homepage</a>
+                            <a href="{% url 'schedule' %}" class="btn btn-secondary ms-2">View Conference Schedule</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} 

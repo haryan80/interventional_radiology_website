@@ -1,0 +1,68 @@
+{% extends 'conference/base.html' %}
+
+{% block title %}Speakers - First KHCC Interventional Oncology Conference 2025{% endblock %}
+
+{% block content %}
+<!-- Speakers Hero Section -->
+<section class="hero-section text-center">
+    <div class="container">
+        <h1 class="display-4 fw-bold mb-4">Our Distinguished Speakers</h1>
+        <p class="lead mb-4">Meet the experts at the forefront of interventional oncology who will share their knowledge and insights at the conference.</p>
+    </div>
+</section>
+
+<!-- Speakers Grid -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            {% for speaker in speakers %}
+            <div class="col-md-4 mb-5">
+                <div class="card speaker-card h-100">
+                    {% if speaker.photo %}
+                    <img src="{{ speaker.photo.url }}" class="card-img-top" alt="{{ speaker.name }}">
+                    {% else %}
+                    <div class="bg-secondary" style="height: 250px; display: flex; align-items: center; justify-content: center;">
+                        <span class="text-white">Photo Coming Soon</span>
+                    </div>
+                    {% endif %}
+                    <div class="card-body">
+                        <h4 class="card-title">{{ speaker.name }}</h4>
+                        {% if speaker.title %}<p class="card-text text-muted mb-1">{{ speaker.title }}</p>{% endif %}
+                        {% if speaker.institution %}<p class="card-text text-muted mb-3">{{ speaker.institution }}</p>{% endif %}
+                        
+                        <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="collapse" 
+                                data-bs-target="#speakerBio{{ speaker.id }}" aria-expanded="false" 
+                                aria-controls="speakerBio{{ speaker.id }}">
+                            View Bio
+                        </button>
+                        
+                        <div class="collapse mt-3" id="speakerBio{{ speaker.id }}">
+                            <div class="card card-body bg-light">
+                                {{ speaker.bio|linebreaks }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center py-5">
+                <p class="lead">Speaker information will be announced soon!</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="mb-4">Don't Miss This Opportunity</h2>
+                <p class="lead mb-4">Learn from these distinguished experts at the First KHCC Interventional Oncology Conference 2025.</p>
+                <a href="{% url 'registration' %}" class="btn btn-accent btn-lg">Register Now</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} 
