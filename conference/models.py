@@ -17,6 +17,7 @@ class Speaker(models.Model):
     bio = models.TextField()
     photo = models.ImageField(upload_to=get_unique_filename, blank=True, null=True)
     order = models.IntegerField(default=0, help_text="Display order on the speakers page")
+    is_visible = models.BooleanField(default=True, help_text="Whether to display this speaker on the website")
     
     def __str__(self):
         return self.name

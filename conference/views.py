@@ -6,8 +6,8 @@ from .forms import RegistrationForm
 
 def home(request):
     """View for the conference homepage"""
-    # Get first 3 speakers to feature on homepage
-    featured_speakers = Speaker.objects.all().order_by('order')[:3]
+    # Get first 3 visible speakers to feature on homepage
+    featured_speakers = Speaker.objects.filter(is_visible=True).order_by('order')[:3]
     # Get first few sessions for preview
     upcoming_sessions = Session.objects.all().order_by('date', 'start_time')[:2]
     
@@ -19,7 +19,7 @@ def home(request):
 
 def speakers(request):
     """View for the speakers page"""
-    speakers_list = Speaker.objects.all().order_by('order')
+    speakers_list = Speaker.objects.filter(is_visible=True).order_by('order')
     return render(request, 'conference/speakers.html', {'speakers': speakers_list})
 
 def schedule(request):
