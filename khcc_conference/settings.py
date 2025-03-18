@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-@_%-(@+di+r6o32@psdlu78q4y@x&&zvf6%ttb0-(p&4x%_(kp
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['www.khcc-ioc.org', 'khcc-ioc.org', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['www.khcc-ioc.org', 'khcc-ioc.org', 'localhost', '127.0.0.1','interventional-radiology.azurewebsites.net']
 
 
 # Application definition
