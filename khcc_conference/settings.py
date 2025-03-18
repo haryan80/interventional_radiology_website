@@ -27,6 +27,13 @@ SECRET_KEY = "django-insecure-@_%-(@+di+r6o32@psdlu78q4y@x&&zvf6%ttb0-(p&4x%_(kp
 DEBUG = True
 
 ALLOWED_HOSTS = ['www.khcc-ioc.org', 'khcc-ioc.org', 'localhost', '127.0.0.1','www.interventional-radiology.azurewebsites.net','interventional-radiology.azurewebsites.net']
+CSRF_TRUSTED_ORIGINS = [
+    "https://www.khcc-ioc.org",
+    "https://khcc-ioc.org",
+    "https://www.interventional-radiology.azurewebsites.net",
+    "https://interventional-radiology.azurewebsites.net"
+]
+
 
 
 # Application definition
