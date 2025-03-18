@@ -8,7 +8,7 @@ class RegistrationForm(forms.ModelForm):
     
     class Meta:
         model = Registration
-        fields = ['full_name', 'email', 'email_confirm', 'phone', 'institution', 
+        fields = ['full_name', 'email', 'email_confirm', 'phone', 'institution', 'country',
                   'attendee_type', 'special_requirements']
         widgets = {
             'full_name': forms.TextInput(attrs={'class': 'form-control', 

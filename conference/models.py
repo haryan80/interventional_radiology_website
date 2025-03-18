@@ -63,9 +63,11 @@ class Registration(models.Model):
     email = models.EmailField()
     phone = models.CharField(max_length=20, blank=True, null=True)
     institution = models.CharField(max_length=200)
+    country = models.CharField(max_length=100)
     attendee_type = models.CharField(max_length=20, choices=ATTENDEE_TYPES)
     special_requirements = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    
     
     def __str__(self):
         return f"{self.full_name} - {self.attendee_type}"

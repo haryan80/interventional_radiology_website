@@ -16,19 +16,19 @@
     <div class="container">
         <div class="row">
             {% for speaker in speakers %}
-            <div class="col-md-4 mb-5">
+            <div class="col-md-6 col-lg-4 mb-4">
                 <div class="card speaker-card h-100">
                     {% if speaker.photo %}
                     <img src="{{ speaker.photo.url }}" class="card-img-top" alt="{{ speaker.name }}">
                     {% else %}
-                    <div class="bg-secondary" style="height: 250px; display: flex; align-items: center; justify-content: center;">
+                    <div class="bg-secondary" style="height: 200px; display: flex; align-items: center; justify-content: center;">
                         <span class="text-white">Photo Coming Soon</span>
                     </div>
                     {% endif %}
-                    <div class="card-body">
-                        <h4 class="card-title">{{ speaker.name }}</h4>
-                        {% if speaker.title %}<p class="card-text text-muted mb-1">{{ speaker.title }}</p>{% endif %}
-                        {% if speaker.institution %}<p class="card-text text-muted mb-3">{{ speaker.institution }}</p>{% endif %}
+                    <div class="card-body p-3">
+                        <h4 class="card-title fs-5 fs-md-4">{{ speaker.name }}</h4>
+                        {% if speaker.title %}<p class="card-text text-muted mb-1 small">{{ speaker.title }}</p>{% endif %}
+                        {% if speaker.institution %}<p class="card-text text-muted mb-3 small">{{ speaker.institution }}</p>{% endif %}
                         
                         <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="collapse" 
                                 data-bs-target="#speakerBio{{ speaker.id }}" aria-expanded="false" 
@@ -37,8 +37,8 @@
                         </button>
                         
                         <div class="collapse mt-3" id="speakerBio{{ speaker.id }}">
-                            <div class="card card-body bg-light">
-                                {{ speaker.bio|linebreaks }}
+                            <div class="card card-body bg-light p-2 p-md-3">
+                                <div class="small">{{ speaker.bio|linebreaks }}</div>
                             </div>
                         </div>
                     </div>
@@ -65,4 +65,26 @@
         </div>
     </div>
 </section>
+
+{% block extra_js %}
+<script>
+    // Initialize all collapse elements to improve mobile experience
+    document.addEventListener('DOMContentLoaded', function() {
+        // Ensure only one bio is open at a time on mobile
+        const bioCollapse = document.querySelectorAll('.collapse');
+        bioCollapse.forEach(collapse => {
+            collapse.addEventListener('show.bs.collapse', function() {
+                if (window.innerWidth < 768) {
+                    bioCollapse.forEach(el => {
+                        if (el !== collapse && el.classList.contains('show')) {
+                            bootstrap.Collapse.getInstance(el).hide();
+                        }
+                    });
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}
+
 {% endblock %} 

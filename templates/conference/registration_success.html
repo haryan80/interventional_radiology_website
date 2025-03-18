@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-lg-8 mx-auto">
                 <div class="card shadow text-center">
-                    <div class="card-body p-5">
+                    <div class="card-body p-3 p-md-5">
                         <div class="mb-4">
                             <i class="fas fa-check-circle fa-5x text-success"></i>
                         </div>
@@ -35,13 +35,15 @@
                         
                         <div class="mt-4">
                             <p>For any questions or assistance, please contact us at:</p>
-                            <p><i class="fas fa-envelope me-2"></i> info@khcc-conference.org</p>
-                            <p><i class="fas fa-phone me-2"></i> +962 6 123 4567</p>
+                            <p><i class="fas fa-envelope me-2"></i> khcc.ioc2025@gmail.com</p>
+                            <p><i class="fas fa-phone me-2"></i> +962 6 5300 460 ext 1426</p>
                         </div>
                         
                         <div class="mt-5">
-                            <a href="{% url 'home' %}" class="btn btn-primary">Return to Homepage</a>
-                            <a href="{% url 'schedule' %}" class="btn btn-secondary ms-2">View Conference Schedule</a>
+                            <div class="d-grid d-md-block gap-2">
+                                <a href="{% url 'home' %}" class="btn btn-primary mb-2 mb-md-0">Return to Homepage</a>
+                                <a href="{% url 'schedule' %}" class="btn btn-secondary">View Conference Schedule</a>
+                            </div>
                         </div>
                     </div>
                 </div>
