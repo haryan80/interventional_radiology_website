@@ -1,0 +1,430 @@
+/* Styles for mobile devices */
+
+@media (max-width: 1024px) {
+    /* Basic */
+  
+    body, .dashboard #content {
+      width: 100%;
+      max-width: none;
+    }
+  
+    /* Main content */
+  
+    #header, #content, #footer {
+      padding: 15px;
+    }
+  
+    .colMS, .colM {
+      margin-right: 0;
+    }
+  
+    #content-related, .colSM #content-related {
+      width: 100%;
+      margin: 0;
+    }
+  
+    /* Collapsed side content */
+  
+    #content-related {
+      margin-top: 0;
+    }
+  
+    #content-related .module {
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+  
+    /* Wrapped in a div to target the style from both responsive.css and rtl.css */
+  
+    .colM #content-main .module,
+    .colMS #content-main .module {
+      max-width: 100%;
+    }
+  
+    /* Header */
+  
+    #header {
+      flex-direction: column;
+      padding: 15px 30px;
+      justify-content: flex-start;
+    }
+  
+    #branding {
+      margin-bottom: 15px;
+      padding-bottom: 0;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+  
+    #user-tools {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      border-top: 1px solid var(--primary);
+      text-align: left;
+      padding-top: 15px;
+      margin-top: 15px;
+    }
+  
+    #user-tools a {
+      display: inline-block;
+      padding: 5px 0;
+      margin-right: 15px;
+    }
+  
+    /* Dashboard */
+  
+    #content-main .module {
+      margin-bottom: 30px;
+    }
+  
+    .dashboard .content h1 {
+      width: 100%;
+    }
+  
+    .dashboard #content-main {
+      width: 100%;
+    }
+  
+    .dashboard .module table td a {
+      padding-right: 0;
+    }
+  
+    .dashboard #content {
+      width: auto;
+    }
+  
+    /* Models */
+  
+    .model-details {
+      display: none;
+    }
+  
+    /* App index */
+  
+    .app-list, .model-list {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  
+    .app-list-item {
+      width: 100%;
+      padding: 0;
+    }
+  
+    /* Change forms */
+  
+    form {
+      margin: 0;
+      padding: 0;
+    }
+  
+    .form-row {
+      padding: 0 0 10px;
+    }
+  
+    .aligned .form-row {
+      padding-bottom: 0;
+    }
+  
+    .aligned .form-row > div {
+      width: 100%;
+    }
+  
+    .aligned .form-row input {
+      max-width: 100%;
+      width: 100%;
+    }
+  
+    fieldset.collapsed .form-row {
+      display: none;
+    }
+  
+    .submit-row {
+      padding: 10px 0 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+  
+    .submit-row input, .submit-row input.default, .submit-row a {
+      display: block;
+      margin: 5px 0;
+      width: 100%;
+      text-align: center;
+    }
+  
+    .submit-row a.closelink {
+      padding: 10px 0;
+    }
+  
+    .selector {
+      display: flex;
+      flex-direction: column;
+    }
+  
+    .selector-available, .selector-chosen {
+      width: auto;
+      max-height: 10rem;
+    }
+  
+    .selector select {
+      max-height: 9rem;
+    }
+  
+    .help {
+      padding-left: 0;
+    }
+  
+    /* Related widget */
+  
+    .related-widget-wrapper {
+      float: none;
+      display: block;
+      width: 100%;
+    }
+  
+    .related-widget-wrapper-link + .selector {
+      max-width: calc(100% - 30px);
+      margin-right: 0;
+    }
+  
+    .selector ~ .related-widget-wrapper-link, .selector + .related-widget-wrapper-link {
+      display: inline-block;
+      margin-top: -2em;
+      position: relative;
+      top: 0;
+      right: 0;
+      float: right;
+    }
+  
+    /* Related object modal */
+  
+    .related-modal {
+      width: 90vw;
+      margin-left: -45vw;
+    }
+  
+    /* Date/time selectors */
+  
+    .datetime {
+      display: inline-block;
+      width: auto;
+    }
+  
+    /* Login */
+  
+    .login #content {
+      padding: 20px 20px 0;
+    }
+  
+    .login #container {
+      padding: 70px 0 0;
+    }
+  
+    .login #header {
+      padding: 15px 20px;
+      height: auto;
+    }
+  
+    .login #branding {
+      max-width: 100%;
+      margin-top: 5px;
+      margin-bottom: 0;
+      width: auto;
+      display: block;
+    }
+  
+    .login .submit-row {
+      padding: 15px 0 0;
+    }
+  
+    /* Change password */
+  
+    .changepassword #content {
+      padding: 20px 20px 0;
+    }
+  
+    .changepassword #container {
+      padding: 70px 0 0;
+    }
+  
+    .changepassword #header {
+      padding: 15px 20px;
+      height: auto;
+    }
+  
+    .changepassword #branding {
+      max-width: 100%;
+      margin-top: 5px;
+      margin-bottom: 0;
+      width: auto;
+      display: block;
+    }
+  
+    .changepassword .submit-row {
+      padding: 15px 0 0;
+    }
+  
+    /* One-off */
+  
+    #content h1 {
+      font-size: 18px;
+      margin: 15px 0 15px 0;
+      padding: 0;
+    }
+  
+    .object-tools {
+      float: none;
+      margin: 0 0 15px;
+      padding: 0;
+      position: static;
+    }
+  
+    .object-tools li {
+      display: inline-block;
+      margin: 0 5px 0 0;
+    }
+  
+    /* Breadcrumbs */
+  
+    .breadcrumbs {
+      padding: 15px 30px;
+    }
+  
+    /* Legend */
+  
+    .datetime img {
+      max-width: 20px;
+    }
+  
+    /* Filter */
+  
+    #changelist-filter {
+      width: 100%;
+      margin-top: 0;
+      margin-right: 0;
+      margin-left: 0;
+      position: static;
+    }
+  
+    /* Multiple checkbox */
+  
+    .actions label {
+      display: flex;
+      align-items: center;
+    }
+  
+    .actions input {
+      margin-right: 10px;
+    }
+  
+    /* Changelist table */
+  
+    #changelist table {
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+  
+    #changelist .paginator,
+    #changelist .xfull {
+      width: 100%;
+    }
+  
+    #changelist .results, #changelist .xfull {
+      overflow-x: auto;
+      width: 100%;
+    }
+  
+    /* 1024 to 800 pixel change */
+    @media (max-width: 800px) {
+      .tabular tr td, .tabular tr th {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+      }
+  
+      #changelist .field-__str__, #changelist .field-actions {
+        width: 100%;
+      }
+  
+      .tabular td.original p.help {
+        padding-left: 0;
+      }
+  
+      .tabular td.original p {
+        display: none;
+      }
+  
+      #changelist-form fieldset > div > div {
+        width: 100%;
+      }
+    }
+  }
+  
+  /* Mobile */
+  @media (max-width: 767px) {
+    /* Layout */
+  
+    [dir="rtl"] #user-tools {
+      text-align: right;
+    }
+  
+    [dir="rtl"] .object-tools li {
+      margin-left: 5px;
+      margin-right: 0;
+    }
+  
+    /* Forms */
+  
+    [dir="rtl"] .selector ~ .related-widget-wrapper-link, [dir="rtl"] .selector + .related-widget-wrapper-link {
+      float: left;
+    }
+  
+    [dir="rtl"] .selector-available, [dir="rtl"] .selector-chosen {
+      float: none;
+    }
+  
+    [dir="rtl"] .selector ul.selector-chooser {
+      display: flex;
+      flex-direction: column;
+      width: 1.5rem;
+      margin: 0 auto 10px;
+    }
+  
+    [dir="rtl"] .selector-add, [dir="rtl"] .selector-remove {
+      text-indent: 0;
+    }
+  
+    /* Dashboard */
+  
+    [dir="rtl"] .dashboard .module table td a {
+      padding-right: 0.6em;
+      padding-left: 16px;
+    }
+  
+    [dir="rtl"] .dashboard #content {
+      margin-left: 0;
+    }
+  
+    /* Login */
+  
+    [dir="rtl"] .login #content {
+      padding: 20px 20px 0;
+    }
+  
+    /* Paginator */
+  
+    [dir="rtl"] .paginator {
+      text-align: center;
+    }
+  
+    /* Mobile selector */
+  
+    [dir="rtl"] .selector .selector-chosen select {
+      width: 100%;
+    }
+  }
