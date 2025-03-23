@@ -1,8 +1,15 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.urls import reverse
-from .models import Speaker, Session, ScheduleItem
+from django.core.mail import send_mail
+from django.db import transaction
+import logging
+
+from .models import Speaker, Session, ScheduleItem, Registration
 from .forms import RegistrationForm
+
+# Set up logging
+logger = logging.getLogger(__name__)
 
 def home(request):
     """View for the conference homepage"""
@@ -43,15 +50,95 @@ def registration(request):
     """View for the registration page"""
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
+        print(f"Form data received: {request.POST}")  # Basic console logging
+        
         if form.is_valid():
-            # Save the form but don't commit yet
-            registration = form.save(commit=False)
-            # Additional processing if needed
-            registration.save()
+            print(f"Form is valid. Cleaned data: {form.cleaned_data}")
             
-            # Show success message
-            messages.success(request, "Thank you for registering for the conference!")
-            return redirect(reverse('registration_success'))
+            try:
+                # Use a transaction to ensure data integrity
+                with transaction.atomic():
+                    # Save the form but don't commit yet
+                    registration = form.save(commit=False)
+                    print(f"Registration object created (not saved yet): {registration.full_name}, {registration.email}")
+                    
+                    # Force debug output to console
+                    print(f"About to save registration to database for: {registration.full_name}")
+                    
+                    # Save to database - THIS IS THE CRITICAL STEP
+                    registration.save()
+                    print(f"Registration saved with ID: {registration.id}")
+                    
+                    # Double-check the save by querying the database
+                    try:
+                        # Query by ID which is the most reliable
+                        verify_reg = Registration.objects.get(id=registration.id)
+                        print(f"VERIFICATION: Found registration in database with ID {verify_reg.id}, name: {verify_reg.full_name}")
+                    except Registration.DoesNotExist:
+                        print("ERROR: Registration was not found in database after save!")
+                    
+                    # Send confirmation email to applicant
+                    send_mail(
+                        'KHCC IOC 2025 Conference Registration Confirmation',
+                        f'''Dear {registration.full_name},
+
+Thank you for registering for the KHCC International Oncology Conference 2025. Your registration has been successfully processed and we're delighted you'll be joining us.
+
+Registration Details:
+- Name: {registration.full_name}
+- Email: {registration.email}
+- Institution: {registration.institution}
+- Country: {registration.country}
+- Attendee Type: {registration.get_attendee_type_display()}
+
+What's Next:
+- You will receive additional information about the conference schedule closer to the event date
+- If you have any questions, please contact us at khcc.ioc2025@gmail.com
+
+We look forward to seeing you at the conference!
+
+Warm regards,
+The KHCC IOC 2025 Conference Team''',
+                        'noreply@example.com',  # From email
+                        [registration.email],  # To email
+                        fail_silently=False,
+                    )
+                    
+                    # Send notification email to admin
+                    send_mail(
+                        'New KHCC IOC 2025 Conference Registration',
+                        f'''A new registration has been submitted for the KHCC IOC 2025 Conference.
+
+Registration Details:
+- Name: {registration.full_name}
+- Email: {registration.email}
+- Phone: {registration.phone or "Not provided"}
+- Institution: {registration.institution}
+- Country: {registration.country}
+- Attendee Type: {registration.get_attendee_type_display()}
+- Special Requirements: {registration.special_requirements or "None"}
+- Submitted on: {registration.created_at.strftime("%Y-%m-%d %H:%M")}
+
+Please review this registration in the admin panel.''',
+                        'noreply@example.com',  # From email
+                        ['khcc.ioc2025@gmail.com'],  # Admin email
+                        fail_silently=False,
+                    )
+                
+                print("Transaction completed successfully")
+                messages.success(request, "Thank you for registering for the conference!")
+                return redirect(reverse('registration_success'))
+            
+            except Exception as e:
+                # Log any errors with detailed traceback
+                import traceback
+                print(f"ERROR saving registration: {str(e)}")
+                print(traceback.format_exc())
+                messages.error(request, "An error occurred during registration. Please try again.")
+        else:
+            # Log form validation errors
+            print(f"Form validation errors: {form.errors}")
+            messages.error(request, "Please correct the errors in the form.")
     else:
         form = RegistrationForm()
     
