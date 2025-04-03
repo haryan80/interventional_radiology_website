@@ -85,9 +85,14 @@ WSGI_APPLICATION = "khcc_conference.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+        "ENGINE": "sql_server.pyodbc",
+        "NAME": "interventional_radiology_db",
+        "USER": "aidiadmin",
+        "PASSWORD": "KhCc@2024!",
+        "HOST": "aidi-db-server.database.windows.net",
+        "OPTIONS": {"driver": "ODBC Driver 18 for SQL Server", 
+        },
+    },
 }
 
 
