@@ -85,7 +85,7 @@ WSGI_APPLICATION = "khcc_conference.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "sql_server.pyodbc",
+        "ENGINE": "mssql",
         "NAME": "interventional_radiology_db",
         "USER": "aidiadmin",
         "PASSWORD": "KhCc@2024!",
