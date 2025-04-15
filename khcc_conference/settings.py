@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-@_%-(@+di+r6o32@psdlu78q4y@x&&zvf6%ttb0-(p&4x%_(kp"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['www.khcc-ioc.org', 'khcc-ioc.org', 'localhost', '127.0.0.1','www.interventional-radiology.azurewebsites.net','interventional-radiology.azurewebsites.net']
 CSRF_TRUSTED_ORIGINS = [
@@ -88,7 +88,7 @@ DATABASES = {
         "ENGINE": "mssql",
         "NAME": "interventional_radiology_db",
         "USER": "aidiadmin",
-        "PASSWORD": "KhCc@2024!",
+        "PASSWORD": "7nJWWG8AAIwbxE71366",
         "HOST": "aidi-db-server.database.windows.net",
         "OPTIONS": {"driver": "ODBC Driver 18 for SQL Server", 
         },
