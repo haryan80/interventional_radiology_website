@@ -87,8 +87,8 @@ DATABASES = {
     "default": {
         "ENGINE": "mssql",
         "NAME": "interventional_radiology_db",
-        "USER": "aidiadmin",
-        "PASSWORD": "7nJWWG8AAIwbxE71366",
+        "USER": "intervention_khcc_admin",
+        "PASSWORD": "BuEg7EFcCUNu9JF%",
         "HOST": "aidi-db-server.database.windows.net",
         "OPTIONS": {"driver": "ODBC Driver 18 for SQL Server", 
         },
